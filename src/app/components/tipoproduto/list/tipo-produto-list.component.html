@@ -1,0 +1,19 @@
+<p *ngFor="let alert of message.getMessage()">
+    <ngb-alert [type]="alert.type" (close)="message.closeAlert(alert)">{{ alert.text }}</ngb-alert>
+</p>
+<div class="row">
+        <div class="col-lg-12">
+                <button class="btn btn-primary pull-right" type="button" [routerLink]="['./create']">Novo</button>
+            </div>
+    <data-grid *ngIf="dados | async; let list" [data]="list" [itensPorPagina]="[5, 20, 100]" [size]="5">
+        <data-coluna title="ID" field="id" width="10%" ></data-coluna>
+        <data-coluna title="Descrição" field="descricao" width="70%"></data-coluna>
+        <data-coluna title="Opções" width="20" classth="text-center">
+            <ng-template #textTemplate let-row="row" let-value="value" let-index="index" let-formatter="formatter">
+                    <a class="btn btn-primary" [routerLink]="['./edit/', row.id]" role="button"><i class="fa fa-pencil"></i></a>
+                    &nbsp;
+                    <a class="btn btn-danger" (click)="acaoDeletar(row)" role="button"><i class="fa fa-trash"></i></a>
+            </ng-template>
+        </data-coluna>
+    </data-grid>
+</div>

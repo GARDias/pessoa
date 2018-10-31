@@ -1,0 +1,26 @@
+<p *ngFor="let alert of message.getMessage()">
+    <ngb-alert [type]="alert.type" (close)="message.closeAlert(alert)">{{ alert.text }}</ngb-alert>
+</p>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="form-horizontal"  [formGroup]="tipoProdutoForm" (ngSubmit)="onFormSubmit(tipoProdutoForm.value)">
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Descrição</label>
+                <input type="text" formControlName="descricao" class="form-control" 
+                        [ngClass]="{ 'is-invalid': tipoProdutoForm.controls['descricao'].invalid && (tipoProdutoForm.controls['descricao'].dirty || tipoProdutoForm.controls['descricao'].touched) }" />
+                <div *ngIf="tipoProdutoForm.controls['descricao'].invalid && (tipoProdutoForm.controls['descricao'].dirty || tipoProdutoForm.controls['descricao'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="tipoProdutoForm.controls['descricao'].errors.required">
+                        O campo descrição é obrigatório.
+                    </div>
+                </div>
+            </div>
+
+
+            <button class="btn btn-default" type="button" [routerLink]="['/tipo-produto']">Voltar</button>
+            <button class="btn btn-primary pull-right" type="submit"
+                [disabled]="tipoProdutoForm.pristine || tipoProdutoForm.invalid">Salvar</button>
+        </form>
+    </div>
+</div>
